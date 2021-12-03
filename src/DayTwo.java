@@ -1024,4 +1024,30 @@ public class DayTwo {
         }
         return result;
     }
+
+    static int[] calculatePositionWithAim() {
+        // [horizontal, depth, aim]
+        int[] result = new int[3];
+        String[] movements = plan.split("\n");
+
+        for (String movement : movements) {
+            String[] splitted = movement.split("\\s+");
+
+            switch (splitted[0]) {
+                case "up":
+                    result[2] = result[2] - Integer.parseInt(splitted[1]);
+                    break;
+                case "down":
+                    result[2] = result[2] + Integer.parseInt(splitted[1]);
+                    break;
+                case "forward":
+                    result[0] = result[0] + Integer.parseInt(splitted[1]);
+                    result[1] = result[1] + result[2] * Integer.parseInt(splitted[1]);
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
+        }
+        return result;
+    }
 }

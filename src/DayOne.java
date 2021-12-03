@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DayOne {
-    private static List<Integer> allMeasurements = Arrays.asList(
+    private final static List<Integer> allMeasurements = Arrays.asList(
                 171
                 , 173
                 , 174

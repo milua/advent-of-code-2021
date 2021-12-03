@@ -2014,4 +2014,18 @@ public class DayOne {
         }
         return increaseCount;
     }
+
+    public static int countAllIncreasesInSlidingWindow() {
+        int increaseCount = 0;
+
+        for(int i = 0; i < allMeasurements.size() - 3; i++){
+            final int previousWindow = allMeasurements.get(i) + allMeasurements.get(i + 1) + allMeasurements.get(i + 2);
+            final int nextWindow = allMeasurements.get(i + 1) + allMeasurements.get(i + 2) + allMeasurements.get(i + 3);
+
+            if(previousWindow < nextWindow) {
+                increaseCount++;
+            }
+        }
+        return increaseCount;
+    }
 }

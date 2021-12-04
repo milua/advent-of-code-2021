@@ -2,15 +2,15 @@ public class Main {
     public static void main(String[] args) {
         /* DAY 1 */
         DayOne dayOne = new DayOne();
-        dayOne.run();
+        // dayOne.run();
 
         /* DAY 2 */
         DayTwo dayTwo = new DayTwo();
-        dayTwo.run();
+        // dayTwo.run();
 
         /* DAY 3 */
         DayThree dayThree = new DayThree();
-        dayThree.run();
+        // dayThree.run();
 
         /* DAY 4 */
         DayFour dayFour = new DayFour();

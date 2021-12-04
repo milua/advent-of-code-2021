@@ -611,43 +611,168 @@ public class DayFour {
                     "73,57,58,33,94\n");
 
     private List<BingoCard> bingoCards = new ArrayList<>();
+    private int round = 0;
 
     public DayFour() {
         initializeBingoCards();
-        System.out.println(bingoCards.size());
-        System.out.println(bingoCards.get(0));
-    }
-
-    private void initializeBingoCards() {
-        for (String bingoRaw : bingoCardsRaw) {
-            List<Integer[]> converted = Arrays.stream(bingoRaw.split("\n"))
-                    // int values
-                    .map(rowString -> Arrays.stream(rowString.split(","))
-                            .map(Integer::parseInt).toArray(Integer[]::new)).collect(Collectors.toList());
-
-            bingoCards.add(new BingoCard(converted.get(0), converted.get(1), converted.get(2), converted.get(3), converted.get(4)));
-        }
-    }
-
-    public void doNothing() {
-        System.out.println("hello");
     }
 
     public void run() {
         System.out.println("========================");
         System.out.println("Day 4 running...");
         System.out.println("========================");
+
+        drawNumber();
+        drawNumber();
+        drawNumber();
+        drawNumber();
+        drawNumber();
+
+        BingoCard isBingo = checkBingo();
+
+        checkIsBingo(isBingo);
+
+        while (isBingo == null && round < draws.size()) {
+            drawNumber();
+
+            isBingo = checkBingo();
+
+            checkIsBingo(isBingo);
+        }
+
+    }
+
+    private void checkIsBingo(BingoCard isBingo) {
+        if (isBingo != null) {
+           //  System.out.println("Bingo! Card: " + isBingo.toString());
+            int sumOfAllUnmarked = isBingo.sumAllUnmarked();
+            System.out.println("Sum of all unmarked: " + sumOfAllUnmarked);
+            System.out.println("current draw: " + draws.get(round - 1));
+            System.out.println("Result: " + sumOfAllUnmarked * draws.get(round - 1));
+        }
+    }
+
+    private BingoCard checkBingo() {
+        BingoCard bingoCard = null;
+        for (BingoCard card : bingoCards) {
+            if(card.hasBingo()) {
+                bingoCard = card;
+            }
+        }
+        return bingoCard;
+    }
+
+    private void drawNumber() {
+        // System.out.println("draw: " + draws.get(round));
+        for (BingoCard card : bingoCards) {
+            card.checkDrawnNumber(draws.get(round));
+        }
+        round++;
+    }
+
+    private void initializeBingoCards() {
+        for (String bingoRaw : bingoCardsRaw) {
+            List<BingoNumber[]> converted = Arrays.stream(bingoRaw.split("\n"))
+                    // int values
+                    .map(rowString -> Arrays.stream(rowString.split(","))
+                            .map(Integer::parseInt).map(BingoNumber::new).toArray(BingoNumber[]::new)).collect(Collectors.toList());
+
+            bingoCards.add(new BingoCard(converted.get(0), converted.get(1), converted.get(2), converted.get(3), converted.get(4)));
+        }
     }
 }
 
 class BingoCard {
-    private Integer[][] card = new Integer[5][5];
+    private BingoNumber[][] card = new BingoNumber[5][5];
 
-    public BingoCard(Integer[] firstRow, Integer[] secondRow, Integer[] thirdRow, Integer[] forthRow, Integer[] fifthRow) {
+    public BingoCard(BingoNumber[] firstRow, BingoNumber[] secondRow, BingoNumber[] thirdRow, BingoNumber[] forthRow, BingoNumber[] fifthRow) {
         card[0] = firstRow;
         card[1] = secondRow;
         card[2] = thirdRow;
         card[3] = forthRow;
         card[4] = fifthRow;
+    }
+
+    void checkDrawnNumber(int drawnNumber) {
+        for (BingoNumber[] bingoNumbers : card) {
+            for (int j = 0; j < bingoNumbers.length; j++) {
+                bingoNumbers[j].checkNumber(drawnNumber);
+            }
+        }
+    }
+
+    boolean hasBingo() {
+        return hasOneFullRow() || hasOneFullColumn();
+    }
+
+    private boolean hasOneFullRow() {
+        final var isFirstRowFull = card[0][0].isMarked() && card[0][1].isMarked() && card[0][2].isMarked() && card[0][3].isMarked() && card[0][4].isMarked();
+        final var isSecondRowFull = card[1][0].isMarked() && card[1][1].isMarked() && card[1][2].isMarked() && card[1][3].isMarked() && card[1][4].isMarked();
+        final var isThirdRowFull = card[2][0].isMarked() && card[2][1].isMarked() && card[2][2].isMarked() && card[2][3].isMarked() && card[2][4].isMarked();
+        final var isForthRowFull = card[3][0].isMarked() && card[3][1].isMarked() && card[3][2].isMarked() && card[3][3].isMarked() && card[3][4].isMarked();
+        final var isFifthRowFull = card[4][0].isMarked() && card[4][1].isMarked() && card[4][2].isMarked() && card[4][3].isMarked() && card[4][4].isMarked();
+
+        return isFirstRowFull || isSecondRowFull || isThirdRowFull || isForthRowFull || isFifthRowFull;
+    }
+
+    private boolean hasOneFullColumn() {
+        final var isFirstColumnFull = card[0][0].isMarked() && card[1][0].isMarked() && card[2][0].isMarked() && card[3][0].isMarked() && card[4][0].isMarked();
+        final var isSecondColumnFull = card[0][1].isMarked() && card[1][1].isMarked() && card[2][1].isMarked() && card[3][1].isMarked() && card[4][1].isMarked();
+        final var isThirdColumnFull = card[0][2].isMarked() && card[1][2].isMarked() && card[2][2].isMarked() && card[3][2].isMarked() && card[4][2].isMarked();
+        final var isForthColumnFull = card[0][3].isMarked() && card[1][3].isMarked() && card[2][3].isMarked() && card[3][3].isMarked() && card[4][3].isMarked();
+        final var isFifthColumnFull = card[0][4].isMarked() && card[1][4].isMarked() && card[2][4].isMarked() && card[3][4].isMarked() && card[4][4].isMarked();
+
+        return isFirstColumnFull || isSecondColumnFull || isThirdColumnFull || isForthColumnFull || isFifthColumnFull;
+    }
+
+    public int sumAllUnmarked() {
+        int sum = 0;
+        for (BingoNumber[] bingoNumbers : card) {
+            for (int j = 0; j < bingoNumbers.length; j++) {
+                if (!bingoNumbers[j].isMarked()) {
+                    sum = sum + bingoNumbers[j].getValue();
+                }
+            }
+        }
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+        return "BingoCard: [\n" +
+                card[0][0] + " " + card[0][1] + " " + card[0][2] + " " + card[0][3] + " " + card[0][4] + "\n" +
+                card[1][0] + " " + card[1][1] + " " + card[1][2] + " " + card[1][3] + " " + card[1][4] + "\n" +
+                card[2][0] + " " + card[2][1] + " " + card[2][2] + " " + card[2][3] + " " + card[2][4] + "\n" +
+                card[3][0] + " " + card[3][1] + " " + card[3][2] + " " + card[3][3] + " " + card[3][4] + "\n" +
+                card[4][0] + " " + card[4][1] + " " + card[4][2] + " " + card[4][3] + " " + card[4][4] + "\n" +
+                "]";
+    }
+}
+
+class BingoNumber {
+    private int value;
+    private boolean marked = false;
+
+    public BingoNumber(int value) {
+        this.value = value;
+    }
+
+    boolean isMarked() {
+        return marked;
+    }
+
+    void checkNumber(int number) {
+        if (number == value) {
+            marked = true;
+        }
+    }
+
+    int getValue() {
+        return this.value;
+    }
+
+    @Override
+    public String toString() {
+        return "" + value;
     }
 }

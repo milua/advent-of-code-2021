@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DayOne {
-    private final static List<Integer> allMeasurements = Arrays.asList(
+    private final List<Integer> allMeasurements = Arrays.asList(
                 171
                 , 173
                 , 174
@@ -2004,7 +2004,19 @@ public class DayOne {
                 , 3280
                 , 3282);
 
-    public static int countAllMeasurementIncreases() {
+    public void run() {
+        System.out.println("========================");
+        System.out.println("Day 1 running...");
+        System.out.println("========================");
+
+        countAllMeasurementIncreases();
+        System.out.println("-----------------------");
+        countAllIncreasesInSlidingWindow();
+    }
+
+    private void countAllMeasurementIncreases() {
+        System.out.println("Part One");
+        System.out.println("Start counting all measurement increases...");
         int increaseCount = 0;
 
         for(int i = 0; i < allMeasurements.size() - 1; i++){
@@ -2012,10 +2024,13 @@ public class DayOne {
                 increaseCount++;
             }
         }
-        return increaseCount;
+        System.out.println("Result Part One: " + increaseCount);
     }
 
-    public static int countAllIncreasesInSlidingWindow() {
+    private void countAllIncreasesInSlidingWindow() {
+        System.out.println("Part Two");
+        System.out.println("Start counting all measurement increases in a sliding window...");
+
         int increaseCount = 0;
 
         for(int i = 0; i < allMeasurements.size() - 3; i++){
@@ -2026,6 +2041,6 @@ public class DayOne {
                 increaseCount++;
             }
         }
-        return increaseCount;
+        System.out.println("Result Part Two: " + increaseCount);
     }
 }

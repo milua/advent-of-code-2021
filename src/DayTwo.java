@@ -1,5 +1,5 @@
 public class DayTwo {
-    private static String plan = "forward 1\n" +
+    private String plan = "forward 1\n" +
             "down 6\n" +
             "down 6\n" +
             "forward 2\n" +
@@ -1000,7 +1000,18 @@ public class DayTwo {
             "down 9\n" +
             "forward 3";
 
-    public static int[] calculatePosition() {
+    public void run() {
+        System.out.println("========================");
+        System.out.println("Day 2 running...");
+        System.out.println("========================");
+
+        calculatePosition();
+        calculatePositionWithAim();
+    }
+
+    private void calculatePosition() {
+        System.out.println("Part One");
+        System.out.println("Start calculating horizontal position and depth...");
         int[] result = new int[2];
 
         // cut string into movement parts, e.g. ["forward 1", "down 2", ...]
@@ -1022,11 +1033,17 @@ public class DayTwo {
                     throw new IllegalStateException();
             }
         }
-        return result;
+
+        System.out.printf("horizontal position: %d and depth: %d%n", result[0], result[1]);
+        System.out.println("Result Part One: " + result[0] * result[1]);
+        System.out.println("-----------------------");
     }
 
-    static int[] calculatePositionWithAim() {
-        // [horizontal, depth, aim]
+   private void calculatePositionWithAim() {
+       System.out.println("Part Two");
+       System.out.println("Start calculating position with aim...");
+
+       // [horizontal, depth, aim]
         int[] result = new int[3];
         String[] movements = plan.split("\n");
 
@@ -1048,6 +1065,7 @@ public class DayTwo {
                     throw new IllegalStateException();
             }
         }
-        return result;
+       System.out.printf("horizontal position: %d and depth: %d and aim: %d%n", result[0], result[1], result[2]);
+       System.out.println("Result Part Two: " + result[0] * result[1]);
     }
 }

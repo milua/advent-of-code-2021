@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Let's play bingo
@@ -624,7 +623,7 @@ public class DayFour {
             List<Integer[]> converted = Arrays.stream(bingoRaw.split("\n"))
                     // int values
                     .map(rowString -> Arrays.stream(rowString.split(","))
-                            .map(stringNumber -> Integer.parseInt(stringNumber)).toArray(size -> new Integer[size])).collect(Collectors.toList());
+                            .map(Integer::parseInt).toArray(Integer[]::new)).collect(Collectors.toList());
 
             bingoCards.add(new BingoCard(converted.get(0), converted.get(1), converted.get(2), converted.get(3), converted.get(4)));
         }
@@ -632,6 +631,12 @@ public class DayFour {
 
     public void doNothing() {
         System.out.println("hello");
+    }
+
+    public void run() {
+        System.out.println("========================");
+        System.out.println("Day 4 running...");
+        System.out.println("========================");
     }
 }
 

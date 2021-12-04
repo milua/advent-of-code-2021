@@ -1,10 +1,4 @@
 public class Main {
-    private DayFour dayFour;
-
-    public Main() {
-        this.dayFour = new DayFour();
-    }
-
     public static void main(String[] args) {
         /* DAY 1 */
         DayOne dayOne = new DayOne();

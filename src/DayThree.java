@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DayThree {
-    private static final List<String> bitInput = Arrays.asList(
+    private static final List<String> diagnosticReport = Arrays.asList(
             "110011110101",
             "110011100010",
             "010100011010",
@@ -1009,11 +1011,11 @@ public class DayThree {
         StringBuilder epsilonRateBitString = new StringBuilder();
 
         // calculate gamma rate
-        for (int i = 0; i < bitInput.get(0).length(); i++) {
+        for (int i = 0; i < diagnosticReport.get(0).length(); i++) {
             int countZeroes = 0;
             int countOnes = 0;
 
-            for (String bitString : bitInput) {
+            for (String bitString : diagnosticReport) {
                 if (bitString.charAt(i) == '0') {
                     countZeroes = countZeroes + 1;
                 } else if (bitString.charAt(i) == '1') {
@@ -1053,5 +1055,116 @@ public class DayThree {
         System.out.println("epsilonRate: " + epsilonRate);
 
         return gammaRate * epsilonRate;
+    }
+
+    static void verifyLifeSupportRating() {
+        long oxygenGeneratorRating = 0L;
+        long co2ScrubberRating = 0L;
+        List<String> tempOxigenGeneratorRates = diagnosticReport;
+        List<String> tempCo2ScrubberRates = diagnosticReport;
+
+        for (int i = 0; i < diagnosticReport.get(0).length(); i++) {
+            int index = i;
+            int countZeroes = 0;
+            int countOnes = 0;
+
+            for (String bitString : diagnosticReport) {
+                if (bitString.charAt(i) == '0') {
+                    countZeroes = countZeroes + 1;
+                } else if (bitString.charAt(i) == '1') {
+                    countOnes = countOnes + 1;
+                }
+            }
+
+            if (countOnes >= countZeroes) {
+                if (tempOxigenGeneratorRates.size() > 1) {
+                    tempOxigenGeneratorRates = tempOxigenGeneratorRates.stream().filter(rate -> rate.charAt(index) == '1').collect(Collectors.toList());
+                }
+                if (tempCo2ScrubberRates.size() > 1) {
+                    tempCo2ScrubberRates = tempCo2ScrubberRates.stream().filter(rate -> rate.charAt(index) == '0').collect(Collectors.toList());
+                }
+            } else if (countOnes < countZeroes) {
+                if (tempOxigenGeneratorRates.size() > 1) {
+                    tempOxigenGeneratorRates = tempOxigenGeneratorRates.stream().filter(rate -> rate.charAt(index) == '0').collect(Collectors.toList());
+                }
+                if (tempCo2ScrubberRates.size() > 1) {
+                    tempCo2ScrubberRates = tempCo2ScrubberRates.stream().filter(rate -> rate.charAt(index) == '1').collect(Collectors.toList());
+                }
+            }
+        }
+
+        System.out.println("tempOxigenGeneratorRates: " + tempOxigenGeneratorRates);
+        System.out.println("tempCo2ScrubberRates: " + tempCo2ScrubberRates);
+    }
+
+    static void calculateOxigenGeneratorRate() {
+        List<String> tempOxigenGeneratorRates = diagnosticReport;
+        String resultRate = "";
+
+        for (int i = 0; i < tempOxigenGeneratorRates.get(0).length(); i++) {
+            int index = i;
+            int countZeroes = 0;
+            int countOnes = 0;
+
+            if(tempOxigenGeneratorRates.size() == 1) {
+                resultRate = tempOxigenGeneratorRates.get(0).substring(0, i);
+                break;
+            }
+
+            for (String bitString : tempOxigenGeneratorRates) {
+                if (bitString.charAt(i) == '0') {
+                    countZeroes = countZeroes + 1;
+                } else if (bitString.charAt(i) == '1') {
+                    countOnes = countOnes + 1;
+                }
+            }
+
+            if (countOnes >= countZeroes) {
+                if (tempOxigenGeneratorRates.size() > 1) {
+                    tempOxigenGeneratorRates = tempOxigenGeneratorRates.stream().filter(rate -> rate.charAt(index) == '1').collect(Collectors.toList());
+                }
+            } else if (countOnes < countZeroes) {
+                if (tempOxigenGeneratorRates.size() > 1) {
+                    tempOxigenGeneratorRates = tempOxigenGeneratorRates.stream().filter(rate -> rate.charAt(index) == '0').collect(Collectors.toList());
+                }
+            }
+        }
+        System.out.println("tempOxigenGeneratorRates: " + resultRate);
+    }
+
+    static void calculateTempCo2ScrubberRates() {
+        List<String> tempCo2ScrubberRates = diagnosticReport;
+        String resultRate = "";
+
+
+        for (int i = 0; i < tempCo2ScrubberRates.get(0).length(); i++) {
+            int index = i;
+            int countZeroes = 0;
+            int countOnes = 0;
+
+            if(tempCo2ScrubberRates.size() == 1) {
+                resultRate = tempCo2ScrubberRates.get(0).substring(0, i);
+                break;
+            }
+
+            for (String bitString : tempCo2ScrubberRates) {
+                if (bitString.charAt(i) == '0') {
+                    countZeroes = countZeroes + 1;
+                } else if (bitString.charAt(i) == '1') {
+                    countOnes = countOnes + 1;
+                }
+            }
+
+            if (countOnes >= countZeroes) {
+                if (tempCo2ScrubberRates.size() > 1) {
+                    tempCo2ScrubberRates = tempCo2ScrubberRates.stream().filter(rate -> rate.charAt(index) == '0').collect(Collectors.toList());
+                }
+            } else if (countOnes < countZeroes) {
+                if (tempCo2ScrubberRates.size() > 1) {
+                    tempCo2ScrubberRates = tempCo2ScrubberRates.stream().filter(rate -> rate.charAt(index) == '1').collect(Collectors.toList());
+                }
+            }
+        }
+        System.out.println("tempCo2ScrubberRates: " + tempCo2ScrubberRates);
     }
 }

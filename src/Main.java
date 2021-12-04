@@ -1,4 +1,10 @@
 public class Main {
+    private DayFour dayFour;
+
+    public Main() {
+        this.dayFour = new DayFour();
+    }
+
     public static void main(String[] args)
     {
         /* DAY 1
@@ -20,7 +26,9 @@ public class Main {
     */
 
         /* DAY 3 */
-        System.out.println("Power Consumption: " + DayThree.calculatePowerConsumption());
+        // System.out.println("Power Consumption: " + DayThree.calculatePowerConsumption());
+        // DayThree.calculateTempCo2ScrubberRates();
+       //  DayThree.calculateOxigenGeneratorRate();
     }
 }
 

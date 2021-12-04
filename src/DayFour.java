@@ -622,6 +622,37 @@ public class DayFour {
         System.out.println("Day 4 running...");
         System.out.println("========================");
 
+        winTheGame();
+        System.out.println("-----------------------");
+        loseTheGame();
+    }
+
+    private void loseTheGame() {
+        System.out.println("Part Two");
+        System.out.println("Lose the bingo");
+
+        var losingCard = bingoCards;
+
+        BingoCard isBingo = checkBingo();
+
+        while (losingCard.size() > 1 && round < draws.size()) {
+            drawNumber();
+
+            losingCard = losingCard.stream().filter(card -> !card.hasBingo()).collect(Collectors.toList());
+        }
+        while(!losingCard.get(0).hasBingo() && round < draws.size()){
+            drawNumber();
+        }
+        int sumOfAllUnmarked = losingCard.get(0).sumAllUnmarked();
+
+        System.out.println("Sum of all unmarked: " + sumOfAllUnmarked);
+        System.out.println("current draw: " + draws.get(round - 1));
+        System.out.println("Result: " + sumOfAllUnmarked * draws.get(round - 1));
+    }
+
+    private void winTheGame() {
+        System.out.println("Part One");
+        System.out.println("Win the bingo");
         drawNumber();
         drawNumber();
         drawNumber();
@@ -636,10 +667,7 @@ public class DayFour {
             drawNumber();
 
             isBingo = checkBingo();
-
-            checkIsBingo(isBingo);
         }
-
     }
 
     private void checkIsBingo(BingoCard isBingo) {
@@ -695,8 +723,8 @@ class BingoCard {
 
     void checkDrawnNumber(int drawnNumber) {
         for (BingoNumber[] bingoNumbers : card) {
-            for (int j = 0; j < bingoNumbers.length; j++) {
-                bingoNumbers[j].checkNumber(drawnNumber);
+            for (BingoNumber bingoNumber : bingoNumbers) {
+                bingoNumber.checkNumber(drawnNumber);
             }
         }
     }
@@ -728,9 +756,9 @@ class BingoCard {
     public int sumAllUnmarked() {
         int sum = 0;
         for (BingoNumber[] bingoNumbers : card) {
-            for (int j = 0; j < bingoNumbers.length; j++) {
-                if (!bingoNumbers[j].isMarked()) {
-                    sum = sum + bingoNumbers[j].getValue();
+            for (BingoNumber bingoNumber : bingoNumbers) {
+                if (!bingoNumber.isMarked()) {
+                    sum = sum + bingoNumber.getValue();
                 }
             }
         }
@@ -746,6 +774,19 @@ class BingoCard {
                 card[3][0] + " " + card[3][1] + " " + card[3][2] + " " + card[3][3] + " " + card[3][4] + "\n" +
                 card[4][0] + " " + card[4][1] + " " + card[4][2] + " " + card[4][3] + " " + card[4][4] + "\n" +
                 "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BingoCard bingoCard = (BingoCard) o;
+        return Arrays.deepEquals(card, bingoCard.card);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(card);
     }
 }
 

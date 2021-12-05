@@ -1,3 +1,5 @@
+package main.java;
+
 public class DayTwo {
     private String plan = "forward 1\n" +
             "down 6\n" +

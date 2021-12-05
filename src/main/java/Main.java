@@ -1,3 +1,7 @@
+package main.java;
+
+import main.java.five.DayFive;
+
 public class Main {
     public static void main(String[] args) {
         /* DAY 1 */
@@ -14,7 +18,11 @@ public class Main {
 
         /* DAY 4 */
         DayFour dayFour = new DayFour();
-        dayFour.run();
+        // dayFour.run();
+
+        /* DAY 5*/
+        DayFive dayFive = new DayFive();
+        dayFive.run();
     }
 }
 

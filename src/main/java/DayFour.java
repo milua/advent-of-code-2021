@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -767,7 +769,7 @@ class BingoCard {
 
     @Override
     public String toString() {
-        return "BingoCard: [\n" +
+        return "main.java.BingoCard: [\n" +
                 card[0][0] + " " + card[0][1] + " " + card[0][2] + " " + card[0][3] + " " + card[0][4] + "\n" +
                 card[1][0] + " " + card[1][1] + " " + card[1][2] + " " + card[1][3] + " " + card[1][4] + "\n" +
                 card[2][0] + " " + card[2][1] + " " + card[2][2] + " " + card[2][3] + " " + card[2][4] + "\n" +

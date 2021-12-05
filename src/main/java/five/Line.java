@@ -29,7 +29,7 @@ public class Line {
         return end;
     }
 
-    public List<Point> allPointsOnLine() {
+    public List<Point> getAllPointsOnLine() {
         List<Point> result = new ArrayList<>();
             int steps = 0;
             int direction = 1;

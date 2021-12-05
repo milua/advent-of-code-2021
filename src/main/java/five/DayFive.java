@@ -538,6 +538,10 @@ public class DayFive {
         Board board = new Board(maxXAndMaxY);
         System.out.printf("Initialized board with size: (%d,%d)\n", maxXAndMaxY.getX(), maxXAndMaxY.getY());
 
+        for(Line line : filteredHorizontalAndVerticalLines) {
+            board.drawOnBoard(line);
+        }
+        board.printBoard();
     }
 
     private Point findMaxXAndMaxY(List<Line> lines) {

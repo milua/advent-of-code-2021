@@ -15,9 +15,9 @@ class LineTest {
         Line line3 = new Line(new Point(-1,-2), new Point(-1,-2));
 
         // Act & Assert
-        assertTrue(line1.allPointsOnLine().contains(new Point(0,0)));
-        assertTrue(line2.allPointsOnLine().contains(new Point(1,2)));
-        assertTrue(line3.allPointsOnLine().contains(new Point(-1,-2)));
+        assertTrue(line1.getAllPointsOnLine().contains(new Point(0,0)));
+        assertTrue(line2.getAllPointsOnLine().contains(new Point(1,2)));
+        assertTrue(line3.getAllPointsOnLine().contains(new Point(-1,-2)));
     }
 
     @Test
@@ -26,10 +26,10 @@ class LineTest {
         Line line = new Line(new Point(0,0), new Point(0,3));
 
         // Act & Assert
-        assertTrue(line.allPointsOnLine().contains(new Point(0,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,1)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,2)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,3)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,1)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,2)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,3)));
     }
 
     @Test
@@ -38,10 +38,10 @@ class LineTest {
         Line line = new Line(new Point(0,0), new Point(0,-3));
 
         // Act & Assert
-        assertTrue(line.allPointsOnLine().contains(new Point(0,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,-1)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,-2)));
-        assertTrue(line.allPointsOnLine().contains(new Point(0,-3)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,-1)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,-2)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,-3)));
     }
 
     @Test
@@ -50,10 +50,10 @@ class LineTest {
         Line line = new Line(new Point(0,0), new Point(3,0));
 
         // Act & Assert
-        assertTrue(line.allPointsOnLine().contains(new Point(0,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(1, 0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(2,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(3, 0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(1, 0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(2,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(3, 0)));
     }
 
     @Test
@@ -62,9 +62,9 @@ class LineTest {
         Line line = new Line(new Point(0,0), new Point(-3,0));
 
         // Act & Assert
-        assertTrue(line.allPointsOnLine().contains(new Point(0,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(-1, 0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(-2,0)));
-        assertTrue(line.allPointsOnLine().contains(new Point(-3, 0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(0,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(-1, 0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(-2,0)));
+        assertTrue(line.getAllPointsOnLine().contains(new Point(-3, 0)));
     }
 }

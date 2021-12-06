@@ -541,7 +541,8 @@ public class DayFive {
         for(Line line : filteredHorizontalAndVerticalLines) {
             board.drawOnBoard(line);
         }
-        board.printBoard();
+        int overlaps = board.calculateAllOverlappingLines();
+        System.out.printf("There are '%d' points overlapping", overlaps);
     }
 
     private Point findMaxXAndMaxY(List<Line> lines) {

@@ -14,12 +14,20 @@ public class Board {
     public void drawOnBoard(Line line) {
         List<Point> allPointsOnLine = line.getAllPointsOnLine();
         for (Point point : allPointsOnLine) {
-            try{
             board[point.getX()][point.getY()] = board[point.getX()][point.getY()] + 1;
-            } catch (Exception e) {
+        }
+    }
 
+    public int calculateAllOverlappingLines() {
+        int count = 0;
+        for (int i = 0; i < maxEndPoint.getX(); i++) {
+            for (int j = 0; j < maxEndPoint.getY(); j++) {
+                if (board[i][j] > 1) {
+                    count = count + 1;
+                }
             }
         }
+        return count;
     }
 
     public void printBoard() {

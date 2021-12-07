@@ -1,6 +1,7 @@
 package main.java;
 
 import main.java.five.DayFive;
+import main.java.six.DaySix;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,11 @@ public class Main {
 
         /* DAY 5*/
         DayFive dayFive = new DayFive();
-        dayFive.run();
+        //  dayFive.run();
+
+        /* DAY 6 */
+        DaySix daySix = new DaySix();
+        daySix.run();
     }
 }
 

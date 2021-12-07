@@ -510,14 +510,14 @@ public class DayFive {
     private List<Line> allLines = new ArrayList<>();
 
     public DayFive() {
+    }
+
+    public void run() {
         System.out.println("========================");
         System.out.println("Day 5 running...");
         System.out.println("========================");
 
         transformIntoLines();
-    }
-
-    public void run() {
 
         calculateOverlappingHorizontalAndVerticalLines();
         System.out.println("-----------------------");
